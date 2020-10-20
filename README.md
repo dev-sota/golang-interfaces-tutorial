@@ -1,1 +1,1 @@
-# golang-interfaces-tutorial
+# Golang Interfaces Tutorial with Email Examples
