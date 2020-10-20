@@ -12,19 +12,24 @@ type Teacher struct {
 	Name string
 }
 
+type Person interface {
+	getEmail() string
+}
+
 func main() {
-	s := Student{
+	var s, t Person
+	s = Student{
 		Name:   "Yamada",
 		Number: 999,
 		Grade:  5,
 	}
-	t := Teacher{
+	t = Teacher{
 		Name: "Tsubomi",
 	}
 
-	cxtStu := sendEmailOfStudent(s)
+	cxtStu := sendEmail(s)
 	fmt.Println(cxtStu)
-	cxtTea := sendEmailOfTeacher(t)
+	cxtTea := sendEmail(t)
 	fmt.Println(cxtTea)
 }
 
@@ -35,18 +40,8 @@ func (t Teacher) getEmail() string {
 	return t.Name + "@teacher.co.jp"
 }
 
-func sendEmailOfStudent(s Student) (context string) {
-	from := s.getEmail()
-	context = `
-  送信元 : ` + from + `
-  これはテスト用のメールです。
-  よろしくお願いします。
-  `
-	return context
-}
-
-func sendEmailOfTeacher(t Teacher) (context string) {
-	from := t.getEmail()
+func sendEmail(p Person) (context string) {
+	from := p.getEmail()
 	context = `
   送信元 : ` + from + `
   これはテスト用のメールです。
